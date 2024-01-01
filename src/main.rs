@@ -1,6 +1,8 @@
 #![warn(clippy::all, rust_2018_idioms)]
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")] // hide console window on Windows in release
 
+use eframe::egui;
+
 // When compiling natively:
 #[cfg(not(target_arch = "wasm32"))]
 fn main() -> eframe::Result<()> {
@@ -15,7 +17,10 @@ fn main() -> eframe::Result<()> {
     eframe::run_native(
         "tp palyer",
         native_options,
-        Box::new(|cc| Box::new(tp_palyer::TemplateApp::new(cc))),
+        Box::new(|cc| {
+            egui_extras::install_image_loaders(&cc.egui_ctx);
+            Box::new(tp_palyer::TemplateApp::new(cc))
+        }),
     )
 }
 

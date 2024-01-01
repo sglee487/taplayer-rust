@@ -79,6 +79,13 @@ impl eframe::App for TemplateApp {
                 self.value += 1.0;
             }
 
+            egui::ScrollArea::vertical().show(ui, |ui| {
+                ui.add(
+                    egui::Image::new("https://picsum.photos/seed/1.759706314/1024").rounding(10.0),
+                );
+                ui.image(egui::include_image!("lan.jpg"));
+            });
+
             ui.separator();
 
             ui.add(egui::github_link_file!(
